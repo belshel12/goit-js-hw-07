@@ -1,22 +1,21 @@
 import { galleryItems } from "./gallery-items.js";
-// Change code below this line
 
-const gallery = document.querySelector(".gallery");
+const list = document.querySelector(".gallery");
 
-const galleryItemsMarkup = galleryItems
+const markup = galleryItems
   .map(
-    (item) => `
-	 <a class="gallery__item" href=${item.original}>
+    ({ preview, original, description }) => `<li class="gallery__item">
+  <a class="gallery__link" href=${original}>
   <img
-	 loading = "lazy"
-	 class="gallery__image"
-	 src=${item.preview}
-	 alt=${item.description}
-  />
-</a>`
+  loading = "lazy"
+  class="gallery__image"
+      src=${preview}
+      alt=${description}
+  /></a></li>`
   )
   .join("");
-gallery.insertAdjacentHTML("beforeend", galleryItemsMarkup);
+
+list.insertAdjacentHTML("beforeend", markup);
 
 const lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
